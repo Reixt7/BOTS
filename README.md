@@ -22,7 +22,7 @@ index=botsv1 imreallynotbatman.com
 index="botsv1" imreallynotbatman.com src="40.80.148.42" http_method=POST
 ```
 
-![[Pasted image 20260928121000.png]]
+![Acunetix Scanner Log](IMG/Pasted%20image%2020260928121000.png)
 
 **Ответ:** `Acunetix`
 
@@ -32,7 +32,7 @@ index="botsv1" imreallynotbatman.com src="40.80.148.42" http_method=POST
 
 Оставив тот же самый запрос видно, какой CMS использует веб-ресурс
 
-![[Pasted image 20260928122155.png]]
+![Joomla CMS Verification](IMG/Pasted%20image%2020260928122155.png)
 
 **Ответ:** `Joomla`
 
@@ -48,7 +48,7 @@ index=botsv1 sourcetype=stream:http src_ip=192.168.250.70
 
 Таким образом я увижу кому и какой именно контент отдавал веб-сервер
 
-![[Pasted image 20260928155949.png]]
+![Defacement Image Log](IMG/Pasted%20image%2020260928155949.png)
 
 **Ответ:** `poisonivy-is-coming-for-you-batman.jpeg`
 
@@ -58,7 +58,7 @@ index=botsv1 sourcetype=stream:http src_ip=192.168.250.70
 
 При исследовании события со скачиванием defac файла `poisonivy-is-coming-for-you-batman.jpeg` в том же самом HTTP-логе проверяем HTTP-заголовки запроса (`Host` / поле `site`):
 
-![[Pasted image 20260928160541.png]]
+![DDNS FQDN Headers](IMG/Pasted%20image%2020260928160541.png)
 
 **Ответ:** `prankglassinebracket.jumpingcrab.com`
 
@@ -68,7 +68,7 @@ index=botsv1 sourcetype=stream:http src_ip=192.168.250.70
 
 В этом же событии хранится IPv4:
 
-![[Pasted image 20260928160840.png]]
+![Pre-staged C2 IP](IMG/Pasted%20image%2020260928160840.png)
 
 **Ответ:** `23.22.63.114`
 
@@ -82,7 +82,7 @@ index=botsv1 sourcetype=stream:http src_ip=192.168.250.70
 index=botsv1 dest_ip=192.168.250.70 sourcetype="stream:http" http_method=POST form_data="*username*" form_data="*passwd*"
 ```
 
-![[Pasted image 20260928163601.png]]
+![Brute Force POST Requests](IMG/Pasted%20image%2020260928163601.png)
 
 **Ответ:** `23.22.63.114`
 
@@ -96,7 +96,7 @@ index=botsv1 dest_ip=192.168.250.70 sourcetype="stream:http" http_method=POST fo
 index=botsv1 dest_ip="192.168.250.70" http_method=POST .exe
 ```
 
-![[Pasted image 20260928170507.png]]
+![Uploaded Executable Log](IMG/Pasted%20image%2020260928170507.png)
 
 Какой конкретно из этих двоих файлов нужен, не известно, провожу расследование глубже по `3791.exe`:
 
@@ -106,7 +106,7 @@ index=botsv1 3791.exe
 
 Проверяю `sourcetype`
 
-![[Pasted image 20260928171740.png]]
+![Sysmon Sourcetype Distribution](IMG/Pasted%20image%2020260928171740.png)
 
 и видно, как больше кол-во записей записано в Sysmon, по нему и ищу ивенты связанные с файлом:
 
@@ -157,7 +157,7 @@ index="botsv1" 3791.exe sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Oper
 
 Здесь нужно провести расследование в интернете проверив в VirusTotal IP-адрес `23.22.63.114` 
 
-![[Pasted image 20261003140211.png]]
+![VirusTotal IP Relations](IMG/Pasted%20image%2020261003140211.png)
 
 **Ответ:** `9709473ab351387aab9e816eff3910b9f28a7a70202e250ed46dba8f820f34a8`
 
@@ -167,7 +167,7 @@ index="botsv1" 3791.exe sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Oper
 
 В вкладке **Community** есть ответ
 
-![[Pasted image 20261003140406.png]]
+![VirusTotal Community Comments](IMG/Pasted%20image%2020261003140406.png)
 
 **Ответ:** `4e 65 6c 20 6d 65 7a 7a 6f 20 64 65 6c 20 63 61 6d 6d 69 6e 6f 20 64 69 20 6e 6f 73 74 72 61 20 76 69 74 61 20 6d 69 20 72 69 74 72 6f 76 61 69 20 70 65 72 20 75 6e 61 20 73 65 6c 76 61 20 6f 73 63 75 72 61`
 
@@ -199,7 +199,7 @@ index=botsv1 sourcetype=stream:http dest=192.168.250.70 http_method=POST form_da
 | table song password
 ```
 
-![[Pasted image 20261003142523.png]]
+![Coldplay Song Lookup Result](IMG/Pasted%20image%2020261003142523.png)
 
 **Ответ:** `yellow`
 
@@ -214,7 +214,7 @@ index=botsv1 sourcetype="stream:http" http_method=POST form_data="*username*pass
 |sort — count
 ```
 
-![[Pasted image 20261003144518.png]]
+![Admin Password Verification](IMG/Pasted%20image%2020261003144518.png)
 
 **Ответ:** `batman`
 
@@ -230,7 +230,7 @@ index=botsv1 sourcetype=stream:http
 |table duration
 ```
 
-![[Pasted image 20261003144651.png]]
+![Average Password Length Result](IMG/Pasted%20image%2020261003144651.png)
 
 **Ответ:** `92.17`
 
@@ -244,6 +244,6 @@ index=botsv1 sourcetype=stream:http form_data=*username*passwd*
 |stats dc(Password)
 ```
 
-![[Pasted image 20261003144847.png]]
+![Unique Passwords Count](IMG/Pasted%20image%2020261003144847.png)
 
 **Ответ:** `412`
