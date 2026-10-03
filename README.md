@@ -8,7 +8,7 @@
 index=botsv1 imreallynotbatman.com
 ```
 
-![[Pasted image 20260928120544.png]]
+![Recon Scan](IMG/Pasted%20image%2020260928120544.png)
 
 **Ответ:** `40.80.148.42`
 
